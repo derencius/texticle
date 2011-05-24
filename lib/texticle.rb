@@ -71,7 +71,7 @@ module Texticle
       end.join(' & ')
 
       {
-        :select => "#{table_name}.*, ts_rank_cd((#{this_index.to_s}),
+        :select => "distinct(#{table_name}.*), ts_rank_cd((#{this_index.to_s}),
           to_tsquery(#{connection.quote(dictionary)}, #{connection.quote(term)})) as rank",
         :conditions =>
           ["#{this_index.to_s} @@ to_tsquery(?,?)", dictionary, term],
