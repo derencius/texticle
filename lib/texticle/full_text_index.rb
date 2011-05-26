@@ -18,7 +18,11 @@ module Texticle
       base_name = File.basename(filename, '.rb')
       rel_path = file_dir_name.gsub(@@rails_models_path,"")
       class_name = [rel_path,base_name].join('/').pluralize.classify
-      class_name.constantize
+      begin
+        class_name.constantize
+      rescue
+        nil
+      end
     end
 
     def create
